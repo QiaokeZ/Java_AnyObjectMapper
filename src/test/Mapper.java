@@ -1,7 +1,7 @@
 package test;
 
-import core.extension.ObjectMapper;
-import core.extension.ObjectSerializer;
+import core.mapper.ObjectMapper;
+import core.mapper.ObjectSerializer;
 import core.org.json.JSONArray;
 import core.org.json.JSONObject;
 import test.bean.Computer;
@@ -32,8 +32,8 @@ public class Mapper {
         //优点：整个项目只需要一个bean
 
         serializer = new ObjectSerializer();
-        serializer.set(ObjectSerializer.DecodeCodingkeys, decodeCodingkeys);
-        serializer.set(ObjectSerializer.DecodeClassInArrayKeys, decodeClassInArrayKeys);
+        serializer.setDecodeCodingkeys(decodeCodingkeys);
+        serializer.setDecodeClassInArrayKeys(decodeClassInArrayKeys);
 
         jsonToBean();
         mapToBean();

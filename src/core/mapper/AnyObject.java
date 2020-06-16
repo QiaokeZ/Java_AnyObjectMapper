@@ -1,4 +1,4 @@
-package core.extension;
+package core.mapper;
 
 import java.io.Serializable;
 import java.util.Objects;

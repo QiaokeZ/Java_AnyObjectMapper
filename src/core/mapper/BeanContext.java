@@ -1,4 +1,4 @@
-package core.extension;
+package core.mapper;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;

@@ -1,7 +1,7 @@
 package test.bean;
 
 
-import core.extension.AnyObject;
+import core.mapper.AnyObject;
 
 /**
  * Created by admin on 2020/5/22.
