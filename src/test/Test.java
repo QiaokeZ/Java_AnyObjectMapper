@@ -1,7 +1,7 @@
 package test;
 
-import core.mapper.ObjectMapper;
-import core.mapper.ObjectSerializer;
+import core.mapper.Mapper;
+import core.mapper.Serializer;
 import core.org.json.JSONArray;
 import core.org.json.JSONObject;
 import test.bean.Computer;
@@ -12,9 +12,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Mapper {
+public class Test {
 
-    private static ObjectSerializer serializer;
+    private static Serializer serializer;
 
     public static void main(String[] args) {
         Map<String, String> decodeCodingkeys = new HashMap();
@@ -31,7 +31,7 @@ public class Mapper {
         //缺点：取值时比较麻烦
         //优点：整个项目只需要一个bean
 
-        serializer = new ObjectSerializer();
+        serializer = new Serializer();
         serializer.setDecodeCodingkeys(decodeCodingkeys);
         serializer.setDecodeClassInArrayKeys(decodeClassInArrayKeys);
 
@@ -43,8 +43,8 @@ public class Mapper {
 
     public static void jsonToBean() {
         try {
-            Computer computer = ObjectMapper.decode(Computer.class, json, serializer);
-            PublicBean publicBean = ObjectMapper.decode(PublicBean.class, json, serializer);
+            Computer computer = Mapper.decode(Computer.class, json, serializer);
+            PublicBean publicBean = Mapper.decode(PublicBean.class, json, serializer);
             System.out.println(computer.cpu.name);
             System.out.println(computer.cpu.codeName);
             System.out.println(publicBean.cpu.get(PublicBean.class).name);
@@ -58,8 +58,8 @@ public class Mapper {
         JSONObject jsonObject = new JSONObject(json);
         Map<String, Object> map = jsonObject.toMap();
         try {
-            Computer computer = ObjectMapper.decode(Computer.class, map, serializer);
-            PublicBean publicBean = ObjectMapper.decode(PublicBean.class, map, serializer);
+            Computer computer = Mapper.decode(Computer.class, map, serializer);
+            PublicBean publicBean = Mapper.decode(PublicBean.class, map, serializer);
             System.out.println(computer.cpu.name);
             System.out.println(publicBean.cpu.get(PublicBean.class).name);
         } catch (Exception e) {
@@ -69,8 +69,8 @@ public class Mapper {
 
     public static void jsonArrayToBean() {
         try {
-            List<Computer> computers = ObjectMapper.decode(Computer.class, jsonArray, serializer);
-            List<PublicBean> publicBeans = ObjectMapper.decode(PublicBean.class, jsonArray, serializer);
+            List<Computer> computers = Mapper.decode(Computer.class, jsonArray, serializer);
+            List<PublicBean> publicBeans = Mapper.decode(PublicBean.class, jsonArray, serializer);
             System.out.println(computers.get(1).cpu.name);
             System.out.println(publicBeans.get(2).cpu.get(PublicBean.class).name);
         } catch (Exception e) {
@@ -82,8 +82,8 @@ public class Mapper {
         JSONArray jsonObject = new JSONArray(jsonArray);
         List<Object> list = jsonObject.toList();
         try {
-            List<Computer> computers = ObjectMapper.decode(Computer.class, list, serializer);
-            List<PublicBean> publicBeans = ObjectMapper.decode(PublicBean.class, list, serializer);
+            List<Computer> computers = Mapper.decode(Computer.class, list, serializer);
+            List<PublicBean> publicBeans = Mapper.decode(PublicBean.class, list, serializer);
             System.out.println(computers.get(1).cpu.name);
             System.out.println(publicBeans.get(2).cpu.get(PublicBean.class).name);
         } catch (Exception e) {

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public final class ObjectMapper {
+public final class Mapper {
 
     @Nullable
     public static <T> T decode(@NotNull Class<?> cls, @NotNull Object source) throws Exception {
@@ -19,7 +19,7 @@ public final class ObjectMapper {
     }
 
     @Nullable
-    public static <T> T decode(@NotNull Class<?> cls, @NotNull Object source, @Nullable ObjectSerializer serializer) throws Exception {
+    public static <T> T decode(@NotNull Class<?> cls, @NotNull Object source, @Nullable Serializer serializer) throws Exception {
         Object json = validJSONObject(source);
         BeanContext context = BeanContext.get(cls);
         if (json instanceof JSONArray) {
@@ -34,7 +34,7 @@ public final class ObjectMapper {
         return null;
     }
 
-    private static <T> T decode(BeanContext context, JSONArray jsonArray, ObjectSerializer serializer) throws Exception {
+    private static <T> T decode(BeanContext context, JSONArray jsonArray, Serializer serializer) throws Exception {
         List results = new ArrayList();
         for (int i = 0; i < jsonArray.length(); i++) {
             Object object = decode(context.cls, jsonArray.getJSONObject(i), serializer);
@@ -43,7 +43,7 @@ public final class ObjectMapper {
         return (T) results;
     }
 
-    private static <T> T decode(BeanContext context, List list, ObjectSerializer serializer) throws Exception {
+    private static <T> T decode(BeanContext context, List list, Serializer serializer) throws Exception {
         List results = new ArrayList();
         for (int i = 0; i < list.size(); i++) {
             Object object = decode(context.cls, list.get(i), serializer);
@@ -52,7 +52,7 @@ public final class ObjectMapper {
         return (T) results;
     }
 
-    private static <T> T decode(BeanContext context, JSONObject jsonObject, ObjectSerializer serializer) throws Exception {
+    private static <T> T decode(BeanContext context, JSONObject jsonObject, Serializer serializer) throws Exception {
         Object bean = context.cls.newInstance();
         Map<String, String> codingkeys = null;
         if (serializer != null) {
@@ -74,7 +74,7 @@ public final class ObjectMapper {
         return (T) bean;
     }
 
-    private static <T> T decode(BeanContext context, Map map, ObjectSerializer serializer) throws Exception {
+    private static <T> T decode(BeanContext context, Map map, Serializer serializer) throws Exception {
         Object bean = context.cls.newInstance();
         Map<String, String> codingkeys = null;
         if (serializer != null) {
@@ -169,12 +169,12 @@ public final class ObjectMapper {
     private static class Property {
         BeanContext beanContext;
         Object bean;
-        ObjectSerializer serializer;
+        Serializer serializer;
         FieldContext fieldContext;
         String key;
         Object value;
 
-        public Property(BeanContext beanContext, Object bean, ObjectSerializer serializer, FieldContext fieldContext, String key, Object value) {
+        public Property(BeanContext beanContext, Object bean, Serializer serializer, FieldContext fieldContext, String key, Object value) {
             this.beanContext = beanContext;
             this.bean = bean;
             this.serializer = serializer;

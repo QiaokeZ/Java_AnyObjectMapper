@@ -2,7 +2,7 @@ package core.mapper;
 
 import java.util.Map;
 
-public class ObjectSerializer {
+public class Serializer {
 
     private Map<String, String> decodeCodingkeys;
     private Map<String, Class> decodeClassInArrayKeys;
