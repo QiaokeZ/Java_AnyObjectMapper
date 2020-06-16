@@ -58,7 +58,7 @@ public final class ObjectMapper {
         if (serializer != null) {
             codingkeys = serializer.getDecodeCodingkeys();
         }
-        for (FieldContext field : context.fields.values()) {
+        for (FieldContext field : context.fields) {
             String key = field.name;
             if (codingkeys != null && codingkeys.containsKey(key)) {
                 key = codingkeys.get(key);
@@ -80,7 +80,7 @@ public final class ObjectMapper {
         if (serializer != null) {
             codingkeys = serializer.getDecodeCodingkeys();
         }
-        for (FieldContext field : context.fields.values()) {
+        for (FieldContext field : context.fields) {
             String key = field.name;
             if (codingkeys != null && codingkeys.containsKey(key)) {
                 key = codingkeys.get(key);
