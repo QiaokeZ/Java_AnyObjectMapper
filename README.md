@@ -18,8 +18,8 @@ public static void test() {
 
       try {
           //公共bean(PublicBean)的优缺点:
-          //缺点：取值时比较麻烦
           //优点：整个项目只需要一个bean
+          //缺点：取值时比较麻烦
           PublicBean publicBean = Mapper.decode(PublicBean.class, json, serializer);
           System.out.println(publicBean.cpu.get(PublicBean.class).name);
           System.out.println(publicBean.cpu.get(PublicBean.class).codeName.get(String.class));
