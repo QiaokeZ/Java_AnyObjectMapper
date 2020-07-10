@@ -14,7 +14,7 @@ public class AnyObject implements Serializable {
     }
 
     public <T> T get(Class<T> cls) {
-        return get(cls);
+        return get(cls, null);
     }
 
     public <T> T get(Class<T> cls, Object def) {
