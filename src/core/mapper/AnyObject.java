@@ -3,7 +3,7 @@ package core.mapper;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class AnyObject implements Serializable{
+public class AnyObject implements Serializable {
 
     private final Object rawValue;
     private final Object anyValue;
@@ -14,8 +14,14 @@ public class AnyObject implements Serializable{
     }
 
     public <T> T get(Class<T> cls) {
+        return get(cls);
+    }
+
+    public <T> T get(Class<T> cls, Object def) {
         if (anyValue.getClass().isAssignableFrom(cls)) {
             return (T) anyValue;
+        } else if (def != null) {
+            return (T) def;
         }
         return null;
     }
