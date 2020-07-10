@@ -2,6 +2,30 @@
 
 ```java
 
+public static void test() {
+      Map<String, String> decodeCodingkeys = new HashMap();
+      decodeCodingkeys.put("desc", "desciption");
+      decodeCodingkeys.put("ID", "id");
+      decodeCodingkeys.put("_interface", "interface");
+      decodeCodingkeys.put("_package", "package");
+
+      Map<String, Class> decodeClassInArrayKeys = new HashMap();
+      decodeClassInArrayKeys.put("systems", _System.class);
+
+      Serializer serializer = new Serializer();
+      serializer.setDecodeCodingkeys(decodeCodingkeys);
+      serializer.setDecodeClassInArrayKeys(decodeClassInArrayKeys);
+
+      try {
+          PublicBean publicBean = Mapper.decode(PublicBean.class, json, serializer);
+          System.out.println(publicBean.cpu.get(PublicBean.class).name);
+          System.out.println(publicBean.cpu.get(PublicBean.class).codeName.get(String.class));
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+  }
+    
+    
 //将JSON有可能出现的key全部放进来
 //不确定的类型用AnyObject
 public class PublicBean {
