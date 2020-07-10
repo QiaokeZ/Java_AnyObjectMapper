@@ -28,9 +28,8 @@ public class Test {
 
 
         //公共bean(PublicBean)的优缺点:
-        //缺点：取值时比较麻烦
         //优点：整个项目只需要一个bean
-
+        //缺点：取值时比较麻烦
         serializer = new Serializer();
         serializer.setDecodeCodingkeys(decodeCodingkeys);
         serializer.setDecodeClassInArrayKeys(decodeClassInArrayKeys);
