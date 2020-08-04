@@ -9,7 +9,7 @@ import java.util.Map;
 public final class BeanContext {
 
     public final Class<?> cls;
-    public List<FieldContext> fields;
+    public Map<String, FieldContext> fields;
     public static Map<Class, BeanContext> classCache = new HashMap();
 
     private BeanContext(Class<?> cls) {
@@ -28,12 +28,12 @@ public final class BeanContext {
         }
     }
 
-    private static List findFields(Class<?> cls) {
-        List fields = new ArrayList();
+    private static Map findFields(Class<?> cls) {
+        Map fields = new HashMap();
         while (cls != null) {
             for (Field field : cls.getDeclaredFields()) {
                 FieldContext context = new FieldContext(field);
-                fields.add(context);
+                fields.put(context.name, context);
             }
             cls = cls.getSuperclass();
         }

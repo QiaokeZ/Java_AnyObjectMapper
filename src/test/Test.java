@@ -26,6 +26,11 @@ public class Test {
         Map<String, Class> decodeClassInArrayKeys = new HashMap();
         decodeClassInArrayKeys.put("systems", _System.class);
 
+        Map<String, String> encodeCodingkeys = new HashMap();
+        encodeCodingkeys.put("desc", "desciption");
+        encodeCodingkeys.put("ID", "id");
+        encodeCodingkeys.put("_interface", "interface");
+        encodeCodingkeys.put("_package", "package");
 
         //公共bean(PublicBean)的优缺点:
         //优点：整个项目只需要一个bean
@@ -33,21 +38,28 @@ public class Test {
         serializer = new Serializer();
         serializer.setDecodeCodingkeys(decodeCodingkeys);
         serializer.setDecodeClassInArrayKeys(decodeClassInArrayKeys);
+        serializer.setEncodeCodingkeys(encodeCodingkeys);
 
         jsonToBean();
-        mapToBean();
-        jsonArrayToBean();
-        listToBean();
+//        mapToBean();
+//        jsonArrayToBean();
+//        listToBean();
     }
 
     public static void jsonToBean() {
         try {
             Computer computer = Mapper.decode(Computer.class, json, serializer);
-            PublicBean publicBean = Mapper.decode(PublicBean.class, json, serializer);
-            System.out.println(computer.cpu.name);
-            System.out.println(computer.cpu.codeName);
-            System.out.println(publicBean.cpu.get(PublicBean.class).name);
-            System.out.println(publicBean.cpu.get(PublicBean.class).codeName);
+//            PublicBean publicBean = Mapper.decode(PublicBean.class, json, serializer);
+//            System.out.println(computer.cpu.name);
+//            System.out.println(computer.cpu.codeName);
+//            System.out.println(publicBean.cpu.get(PublicBean.class).name);
+//            System.out.println(publicBean.cpu.get(PublicBean.class).codeName.get(String.class));
+
+
+            Map map = Mapper.encode(computer, serializer);
+            JSONObject jsonObject = new JSONObject(map);
+//
+            System.out.println( jsonObject.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -59,7 +71,7 @@ public class Test {
         try {
             Computer computer = Mapper.decode(Computer.class, map, serializer);
             PublicBean publicBean = Mapper.decode(PublicBean.class, map, serializer);
-            System.out.println(computer.cpu.name);
+//            System.out.println(computer.cpu.name);
             System.out.println(publicBean.cpu.get(PublicBean.class).name);
         } catch (Exception e) {
             e.printStackTrace();
@@ -70,7 +82,7 @@ public class Test {
         try {
             List<Computer> computers = Mapper.decode(Computer.class, jsonArray, serializer);
             List<PublicBean> publicBeans = Mapper.decode(PublicBean.class, jsonArray, serializer);
-            System.out.println(computers.get(1).cpu.name);
+//            System.out.println(computers.get(1).cpu.name);
             System.out.println(publicBeans.get(2).cpu.get(PublicBean.class).name);
         } catch (Exception e) {
             e.printStackTrace();
@@ -83,7 +95,7 @@ public class Test {
         try {
             List<Computer> computers = Mapper.decode(Computer.class, list, serializer);
             List<PublicBean> publicBeans = Mapper.decode(PublicBean.class, list, serializer);
-            System.out.println(computers.get(1).cpu.name);
+//            System.out.println(computers.get(1).cpu.name);
             System.out.println(publicBeans.get(2).cpu.get(PublicBean.class).name);
         } catch (Exception e) {
             e.printStackTrace();
