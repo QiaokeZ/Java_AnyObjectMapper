@@ -8,6 +8,10 @@ public class AnyObject implements Serializable {
     private final Object rawValue;
     private final Object anyValue;
 
+    public AnyObject(Object rawValue) {
+        this(rawValue, null);
+    }
+    
     public AnyObject(Object rawValue, Object anyValue) {
         this.rawValue = rawValue;
         this.anyValue = anyValue;
