@@ -1,6 +1,6 @@
 package test;
 
-import core.mapper.Mapper;
+import core.mapper.ObjectMapper;
 import core.mapper.Serializer;
 import core.org.json.JSONArray;
 import core.org.json.JSONObject;
@@ -41,65 +41,44 @@ public class Test {
         serializer.setEncodeCodingkeys(encodeCodingkeys);
 
         jsonToBean();
-//        mapToBean();
-//        jsonArrayToBean();
-//        listToBean();
+        mapToBean();
+        jsonArrayToBean();
+        listToBean();
     }
 
     public static void jsonToBean() {
-        try {
-            Computer computer = Mapper.decode(Computer.class, json, serializer);
-//            PublicBean publicBean = Mapper.decode(PublicBean.class, json, serializer);
-//            System.out.println(computer.cpu.name);
-//            System.out.println(computer.cpu.codeName);
-//            System.out.println(publicBean.cpu.get(PublicBean.class).name);
-//            System.out.println(publicBean.cpu.get(PublicBean.class).codeName.get(String.class));
-
-
-            Map map = Mapper.encode(computer, serializer);
-            JSONObject jsonObject = new JSONObject(map);
-//
-            System.out.println( jsonObject.toString());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Computer computer = ObjectMapper.decode(Computer.class, json, serializer);
+        PublicBean publicBean = ObjectMapper.decode(PublicBean.class, json, serializer);
+        System.out.println(computer.cpu.name);
+        System.out.println(computer.cpu.codeName);
+        System.out.println(publicBean.cpu.get(PublicBean.class).name);
+        System.out.println(publicBean.cpu.get(PublicBean.class).codeName.get(String.class));
     }
 
     public static void mapToBean() {
         JSONObject jsonObject = new JSONObject(json);
         Map<String, Object> map = jsonObject.toMap();
-        try {
-            Computer computer = Mapper.decode(Computer.class, map, serializer);
-            PublicBean publicBean = Mapper.decode(PublicBean.class, map, serializer);
-//            System.out.println(computer.cpu.name);
-            System.out.println(publicBean.cpu.get(PublicBean.class).name);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        Computer computer = ObjectMapper.decode(Computer.class, map, serializer);
+        PublicBean publicBean = ObjectMapper.decode(PublicBean.class, map, serializer);
+        System.out.println(computer.cpu.name);
+        System.out.println(publicBean.cpu.get(PublicBean.class).name);
     }
 
     public static void jsonArrayToBean() {
-        try {
-            List<Computer> computers = Mapper.decode(Computer.class, jsonArray, serializer);
-            List<PublicBean> publicBeans = Mapper.decode(PublicBean.class, jsonArray, serializer);
-//            System.out.println(computers.get(1).cpu.name);
-            System.out.println(publicBeans.get(2).cpu.get(PublicBean.class).name);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        List<Computer> computers = ObjectMapper.decode(Computer.class, jsonArray, serializer);
+        List<PublicBean> publicBeans = ObjectMapper.decode(PublicBean.class, jsonArray, serializer);
+        System.out.println(computers.get(1).cpu.name);
+        System.out.println(publicBeans.get(2).cpu.get(PublicBean.class).name);
     }
 
     public static void listToBean() {
         JSONArray jsonObject = new JSONArray(jsonArray);
         List<Object> list = jsonObject.toList();
-        try {
-            List<Computer> computers = Mapper.decode(Computer.class, list, serializer);
-            List<PublicBean> publicBeans = Mapper.decode(PublicBean.class, list, serializer);
-//            System.out.println(computers.get(1).cpu.name);
-            System.out.println(publicBeans.get(2).cpu.get(PublicBean.class).name);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        List<Computer> computers = ObjectMapper.decode(Computer.class, list, serializer);
+        List<PublicBean> publicBeans = ObjectMapper.decode(PublicBean.class, list, serializer);
+        System.out.println(computers.get(1).cpu.name);
+        System.out.println(publicBeans.get(2).cpu.get(PublicBean.class).name);
+
     }
 
     public static String jsonArray = "[\n" +
