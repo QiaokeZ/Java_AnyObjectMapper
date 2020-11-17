@@ -3,7 +3,6 @@ iOS:[https://github.com/QiaokeZ/iOS_AnyObjectMapper](https://github.com/QiaokeZ/
 项目中有很多JavaBean类，少则5-10个，多则10-20个，其中大部分的字段都重复了，并且有些字段名称一样但类型不一样，导致不能重用，为了解决这些问题，写了个智能JSON解析，一个JavaBean类替代所有的类。
 
 
-
 //将JSON有可能出现的key全部放进来
 //不确定的类型用AnyObject
 ```java
@@ -151,7 +150,7 @@ public static void testJSONToBean() {
      //公共bean(PublicBean)的优缺点:
      //优点：整个项目只需要一个bean
      //缺点：取值时比较麻烦
-     PublicBean publicBean = Mapper.decode(PublicBean.class, json, serializer);
+     PublicBean publicBean = ObjectMapper.decode(PublicBean.class, json, serializer);
      System.out.println(publicBean.name); //顶级硬件配置
      System.out.println(publicBean.cpu.get(PublicBean.class).name); //Intel Core i9-9900K
      System.out.println(publicBean.cpu.get(PublicBean.class).codeName.get(String.class)); //kaby Lake
