@@ -1,6 +1,7 @@
-package core.mapper;
+package com.etraffic.easycharging.support.json.mapper;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class AnyObject implements Serializable {
@@ -11,7 +12,7 @@ public class AnyObject implements Serializable {
     public AnyObject(Object rawValue) {
         this(rawValue, null);
     }
-    
+
     public AnyObject(Object rawValue, Object anyValue) {
         this.rawValue = rawValue;
         this.anyValue = anyValue;
@@ -28,6 +29,50 @@ public class AnyObject implements Serializable {
             return (T) def;
         }
         return null;
+    }
+
+    public String stringValue() {
+        return stringValue(null);
+    }
+
+    public String stringValue(String def) {
+        return get(String.class, def);
+    }
+
+    public Integer intValue() {
+        return intValue(null);
+    }
+
+    public Integer intValue(Integer def) {
+        return get(Integer.class, def);
+    }
+
+    public Double doubleValue() {
+        return doubleValue(0D);
+    }
+
+    public Double doubleValue(Double def) {
+        if (anyValue.getClass().isAssignableFrom(Double.class)) {
+            return (Double) anyValue;
+        } else if (anyValue.getClass() == BigDecimal.class) {
+            return ((BigDecimal) anyValue).doubleValue();
+        } else {
+            return def;
+        }
+    }
+
+    public Float floatValue() {
+        return floatValue(0F);
+    }
+
+    public Float floatValue(Float def) {
+        if (anyValue.getClass().isAssignableFrom(Float.class)) {
+            return (Float) anyValue;
+        } else if (anyValue.getClass() == BigDecimal.class) {
+            return ((BigDecimal) anyValue).floatValue();
+        } else {
+            return def;
+        }
     }
 
     public Object getRawValue() {
