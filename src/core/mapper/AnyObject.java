@@ -1,4 +1,4 @@
-package com.etraffic.easycharging.support.json.mapper;
+package core.mapper;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
